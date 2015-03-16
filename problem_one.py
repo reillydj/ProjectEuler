@@ -2,6 +2,23 @@ __author__ = 'David Reilly'
 
 import time
 
+"""
+    Project Euler
+    Problem: 1
+
+    'If we list all the natural numbers below 10 that are multiples of 3 or 5,
+        we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+    Find the sum of all the multiples of 3 or 5 below 1000.'
+
+    sum_multiples_generator() solves this using a generator function to reduce space complexity
+
+    sum_multiples_list_comprehension() solves this using a list comprehension
+
+    sum_multiples_generator() is approx. 7x faster than sum_multiples_list_comprehension()
+"""
+
+## Generator to be used in sum_multiples_generator()
 def yield_multiples(multiple, upper_bound):
 
     index = multiple
@@ -11,6 +28,7 @@ def yield_multiples(multiple, upper_bound):
         yield index
         index += multiple
 
+## Use a generator function to reduce space complexity
 def sum_multiples_generator(list_of_multiples, upper_bound):
 
     all_multiples = [list(yield_multiples(x, upper_bound)) for x in list_of_multiples]
