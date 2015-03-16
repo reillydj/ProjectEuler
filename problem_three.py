@@ -10,25 +10,48 @@ __author__ = "David Reilly"
 
 """
 
+import math
+import time
+
 def is_prime(integer):
 
     candidates = [integer % float(x) for x in xrange(2, int(math.ceil(integer ** 0.5)))]
 
     return 0 not in candidates
 
-def generate_primes(upper_bound):
+def quicker_is_prime(integer):
+
+    for candidate in xrange(2, int(math.ceil(integer ** 0.5))):
+
+        if integer % float(candidate) == 0:
+
+            return False
+
+    return True
+
+def generate_primes(upper_bound, prime_checker):
 
     candidate = 1
     while candidate < (upper_bound ** 0.5):
-        if is_prime(candidate) and upper_bound % candidate == 0:
+        if prime_checker(candidate) and upper_bound % candidate == 0:
             yield candidate
         candidate += 1
 
-def maximum_prime(upper_bound):
+def maximum_prime(upper_bound, prime_checker):
 
-    return list(generate_primes(upper_bound))
+    return list(generate_primes(upper_bound, prime_checker))
 
 if __name__ == "__main__":
 
-    print maximum_prime(600851475143)
+
+    ## Solution using quicker prime_checker
+    start_time = time.time()
+    print maximum_prime(600851475143, is_prime)
+    print "Slow is_prime Solution Took ", time.time() - start_time, " Seconds"
+
+    ## Solution using slower prime_checker
+    start_time = time.time()
+    print maximum_prime(600851475143, quicker_is_prime)
+    print "quicker_is_prime Solution Took ", time.time() - start_time, " Seconds"
+
 
