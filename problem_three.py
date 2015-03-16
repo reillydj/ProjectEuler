@@ -24,7 +24,6 @@ def quicker_is_prime(integer):
     for candidate in xrange(2, int(math.ceil(integer ** 0.5))):
 
         if integer % float(candidate) == 0:
-
             return False
 
     return True
