@@ -37,6 +37,4 @@ def find_palindromes():
 
 if __name__ == "__main__":
 
-    print is_palindrome(10101)
-
     print find_palindromes()
